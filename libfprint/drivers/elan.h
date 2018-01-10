@@ -18,9 +18,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "ConstExpressionRequired"
-#pragma ide diagnostic ignored "CannotResolve"
 #ifndef __ELAN_H
 #define __ELAN_H
 

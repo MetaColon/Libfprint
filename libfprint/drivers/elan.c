@@ -18,8 +18,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "CannotResolve"
 #define FP_COMPONENT "elan"
 
 #include <errno.h>
