@@ -18,6 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "CannotResolve"
 #ifndef __ELAN_H
 #define __ELAN_H
 
@@ -178,4 +180,5 @@ static void elan_capture(struct fp_img_dev *dev);
 
 #endif
 
+#pragma clang diagnostic pop
 #pragma clang diagnostic pop

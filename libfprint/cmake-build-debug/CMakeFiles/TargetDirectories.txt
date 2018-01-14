@@ -1,0 +1,3 @@
+/cygdrive/d/Documents/KeckDriver/libfprint/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/cygdrive/d/Documents/KeckDriver/libfprint/cmake-build-debug/CMakeFiles/edit_cache.dir
+/cygdrive/d/Documents/KeckDriver/libfprint/cmake-build-debug/CMakeFiles/libfprint.dir

@@ -22,6 +22,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "CannotResolve"
 #include <glib.h>
 #include <libusb.h>
 
@@ -970,3 +972,5 @@ API_EXPORTED void fp_exit(void)
 	libusb_exit(fpi_usb_ctx);
 }
 
+
+#pragma clang diagnostic pop
