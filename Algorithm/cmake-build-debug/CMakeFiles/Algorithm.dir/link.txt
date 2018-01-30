@@ -1,0 +1,1 @@
+/usr/bin/c++.exe -g  -Wl,--enable-auto-import CMakeFiles/Algorithm.dir/Algorithm.cpp.o  -o Algorithm.exe -Wl,--out-implib,libAlgorithm.dll.a -Wl,--major-image-version,0,--minor-image-version,0 -lopencv2 

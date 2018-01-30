@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/d/Documents/KeckDriver/Algorithm/Algorithm.cpp
+opencv2/imgproc/imgproc.hpp
+/cygdrive/d/Documents/KeckDriver/Algorithm/opencv2/imgproc/imgproc.hpp
+opencv2/highgui/highgui.hpp
+/cygdrive/d/Documents/KeckDriver/Algorithm/opencv2/highgui/highgui.hpp
+stdlib.h
+-
+stdio.h
+-
+Algorithm.hpp
+/cygdrive/d/Documents/KeckDriver/Algorithm/Algorithm.hpp
+
+/cygdrive/d/Documents/KeckDriver/Algorithm/Algorithm.hpp
+zconf.h
+-
+

@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/d/Documents/KeckDriver/Algorithm/Algorithm.hpp
+zconf.h
+-
+
+/cygdrive/d/Documents/KeckDriver/Algorithm/main.c
+stdio.h
+-
+Algorithm.hpp
+/cygdrive/d/Documents/KeckDriver/Algorithm/Algorithm.hpp
+

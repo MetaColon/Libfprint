@@ -1,18 +1,15 @@
 "C:\Users\Meta Colon\.CLion2017.3\system\cygwin_cmake\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /cygdrive/d/Documents/KeckDriver/libfprint
--- The C compiler identification is GNU 6.4.0
--- The CXX compiler identification is GNU 6.4.0
--- Check for working C compiler: /usr/bin/cc
--- Check for working C compiler: /usr/bin/cc -- works
--- Detecting C compiler ABI info
--- Detecting C compiler ABI info - done
--- Detecting C compile features
--- Detecting C compile features - done
--- Check for working CXX compiler: /usr/bin/c++.exe
--- Check for working CXX compiler: /usr/bin/c++.exe -- works
--- Detecting CXX compiler ABI info
--- Detecting CXX compiler ABI info - done
--- Detecting CXX compile features
--- Detecting CXX compile features - done
 -- Configuring done
+CMake Error at CMakeLists.txt:8 (add_executable):
+  Cannot find source file:
+
+    .gitignore
+
+  Tried extensions .c .C .c++ .cc .cpp .cxx .m .M .mm .h .hh .h++ .hm .hpp
+  .hxx .in .txx
+
+
+CMake Error: CMake can not determine linker language for target: libfprint
+CMake Error: Cannot determine link language for target "libfprint".
 -- Generating done
 -- Build files have been written to: /cygdrive/d/Documents/KeckDriver/libfprint/cmake-build-debug
