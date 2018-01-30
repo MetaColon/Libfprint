@@ -90,6 +90,46 @@ Algorithm_EXTERNAL_OBJECTS =
 
 Algorithm.exe: CMakeFiles/Algorithm.dir/Algorithm.cpp.o
 Algorithm.exe: CMakeFiles/Algorithm.dir/build.make
+Algorithm.exe: /usr/lib/libopencv_aruco.dll.a
+Algorithm.exe: /usr/lib/libopencv_bgsegm.dll.a
+Algorithm.exe: /usr/lib/libopencv_bioinspired.dll.a
+Algorithm.exe: /usr/lib/libopencv_ccalib.dll.a
+Algorithm.exe: /usr/lib/libopencv_datasets.dll.a
+Algorithm.exe: /usr/lib/libopencv_dpm.dll.a
+Algorithm.exe: /usr/lib/libopencv_face.dll.a
+Algorithm.exe: /usr/lib/libopencv_freetype.dll.a
+Algorithm.exe: /usr/lib/libopencv_fuzzy.dll.a
+Algorithm.exe: /usr/lib/libopencv_hdf.dll.a
+Algorithm.exe: /usr/lib/libopencv_line_descriptor.dll.a
+Algorithm.exe: /usr/lib/libopencv_optflow.dll.a
+Algorithm.exe: /usr/lib/libopencv_plot.dll.a
+Algorithm.exe: /usr/lib/libopencv_reg.dll.a
+Algorithm.exe: /usr/lib/libopencv_saliency.dll.a
+Algorithm.exe: /usr/lib/libopencv_shape.dll.a
+Algorithm.exe: /usr/lib/libopencv_stereo.dll.a
+Algorithm.exe: /usr/lib/libopencv_stitching.dll.a
+Algorithm.exe: /usr/lib/libopencv_structured_light.dll.a
+Algorithm.exe: /usr/lib/libopencv_superres.dll.a
+Algorithm.exe: /usr/lib/libopencv_surface_matching.dll.a
+Algorithm.exe: /usr/lib/libopencv_text.dll.a
+Algorithm.exe: /usr/lib/libopencv_videostab.dll.a
+Algorithm.exe: /usr/lib/libopencv_ximgproc.dll.a
+Algorithm.exe: /usr/lib/libopencv_xobjdetect.dll.a
+Algorithm.exe: /usr/lib/libopencv_xphoto.dll.a
+Algorithm.exe: /usr/lib/libopencv_phase_unwrapping.dll.a
+Algorithm.exe: /usr/lib/libopencv_rgbd.dll.a
+Algorithm.exe: /usr/lib/libopencv_calib3d.dll.a
+Algorithm.exe: /usr/lib/libopencv_features2d.dll.a
+Algorithm.exe: /usr/lib/libopencv_flann.dll.a
+Algorithm.exe: /usr/lib/libopencv_video.dll.a
+Algorithm.exe: /usr/lib/libopencv_objdetect.dll.a
+Algorithm.exe: /usr/lib/libopencv_ml.dll.a
+Algorithm.exe: /usr/lib/libopencv_highgui.dll.a
+Algorithm.exe: /usr/lib/libopencv_photo.dll.a
+Algorithm.exe: /usr/lib/libopencv_videoio.dll.a
+Algorithm.exe: /usr/lib/libopencv_imgcodecs.dll.a
+Algorithm.exe: /usr/lib/libopencv_imgproc.dll.a
+Algorithm.exe: /usr/lib/libopencv_core.dll.a
 Algorithm.exe: CMakeFiles/Algorithm.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/cygdrive/d/Documents/KeckDriver/Algorithm/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable Algorithm.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Algorithm.dir/link.txt --verbose=$(VERBOSE)

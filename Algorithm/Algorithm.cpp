@@ -7,6 +7,11 @@
 
 using namespace cv;
 
+// TODO Common Region extraction
+// TODO => Rotation, Shifting, Scaling (=> library?)
+// TODO Cross Correlation
+// TODO => IFT?
+
 /// Global variables
 
 Mat src, src_gray;
@@ -24,8 +29,9 @@ int kernel_size = 3;
  */
 void ThinCanny()
 {
-    /// Reduce noise with a kernel 3x3
-    blur(src_gray, detected_edges, Size(3, 3));
+    /// Reduce noise with a kernel 2x2
+    //TODO evaluate perfect kernel size
+    blur(src_gray, detected_edges, Size(2, 2));
 
     /// Canny detector
     Canny(detected_edges, detected_edges, lowThreshold, lowThreshold * ratio, kernel_size);
@@ -63,6 +69,6 @@ int alterImage (char *fileName)
 int main(int argc, char **argv)
 {
     alterImage(argv[1]);
-    imwrite(argv[0], laplaced);
+    imwrite(argv[2], laplaced);
     return 0;
 }

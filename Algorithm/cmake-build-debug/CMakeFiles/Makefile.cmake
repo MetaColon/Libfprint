@@ -21,6 +21,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/cygdrive/c/Users/Meta Colon/.CLion2017.3/system/cygwin_cmake/share/cmake-3.9.6/Modules/Compiler/GNU-C.cmake"
   "/cygdrive/c/Users/Meta Colon/.CLion2017.3/system/cygwin_cmake/share/cmake-3.9.6/Modules/Compiler/GNU-CXX.cmake"
   "/cygdrive/c/Users/Meta Colon/.CLion2017.3/system/cygwin_cmake/share/cmake-3.9.6/Modules/Compiler/GNU.cmake"
+  "/cygdrive/c/Users/Meta Colon/.CLion2017.3/system/cygwin_cmake/share/cmake-3.9.6/Modules/FindPackageHandleStandardArgs.cmake"
+  "/cygdrive/c/Users/Meta Colon/.CLion2017.3/system/cygwin_cmake/share/cmake-3.9.6/Modules/FindPackageMessage.cmake"
   "/cygdrive/c/Users/Meta Colon/.CLion2017.3/system/cygwin_cmake/share/cmake-3.9.6/Modules/Platform/CYGWIN-GNU-C.cmake"
   "/cygdrive/c/Users/Meta Colon/.CLion2017.3/system/cygwin_cmake/share/cmake-3.9.6/Modules/Platform/CYGWIN-GNU-CXX.cmake"
   "/cygdrive/c/Users/Meta Colon/.CLion2017.3/system/cygwin_cmake/share/cmake-3.9.6/Modules/Platform/CYGWIN-GNU.cmake"
@@ -33,6 +35,10 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.9.6/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.9.6/CMakeRCCompiler.cmake"
   "CMakeFiles/3.9.6/CMakeSystem.cmake"
+  "/usr/lib/cmake/OpenCV/OpenCVConfig-version.cmake"
+  "/usr/lib/cmake/OpenCV/OpenCVConfig.cmake"
+  "/usr/lib/cmake/OpenCV/OpenCVModules-relwithdebinfo.cmake"
+  "/usr/lib/cmake/OpenCV/OpenCVModules.cmake"
   )
 
 # The corresponding makefile is:
