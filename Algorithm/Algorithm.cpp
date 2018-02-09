@@ -21,7 +21,7 @@ Mat src, src_gray;
 Mat blurred, blur_current;
 Mat gradientX, gradientY;
 
-int edgeThresh = 1;
+// TODO optimise values
 int lowThreshold = 30;
 int ratio = 3;
 int kernel_size = 3;
@@ -34,10 +34,8 @@ int countX, countY;
 void ThinCanny()
 {
     /// Reduce noise with a kernel 3x3
-    //TODO evaluate perfect kernel size
+    // TODO evaluate perfect kernel size
     blur(src_gray, blur_current, Size(3, 3));
-
-    imwrite("C:\\Users\\Meta Colon\\Desktop\\fp\\blur.png", blur_current);
 
     /// Canny detector
     Canny(blur_current, blur_current, lowThreshold, lowThreshold * ratio, kernel_size);
@@ -46,11 +44,10 @@ void ThinCanny()
     blurred = Scalar::all(0);
 
     src.copyTo(blurred, blur_current);
-
-    imwrite("C:\\Users\\Meta Colon\\Desktop\\fp\\canny.png", blurred);
 }
 
-double** alterImage (char *fileName)
+/// Creates the field orientation image
+double** getFieldOrientationImage (char *fileName)
 {
     /// Load an image
     src = imread(fileName);
@@ -71,17 +68,16 @@ double** alterImage (char *fileName)
     Sobel(blurred, gradientX, CV_64F, 0, 1);
     Sobel(blurred, gradientY, CV_64F, 1, 0);
 
-    imwrite("C:\\Users\\Meta Colon\\Desktop\\fp\\gradientX.png", gradientX);
-    imwrite("C:\\Users\\Meta Colon\\Desktop\\fp\\gradientY.png", gradientY);
-
+    /// The size of the blocks
+    // TODO differently sized blocks
     countX = gradientX.cols / blockSizeX;
     countY = gradientY.rows / blockSizeY;
 
-    cout << "countX: " << countX << "\ncountY: " << countY << "\n";
-
+    /// Get the actual blocks
     Mat** gradientXBlocks = getBlocks(blockSizeX, blockSizeY, countX, countY, gradientX);
     Mat** gradientYBlocks = getBlocks(blockSizeX, blockSizeY, countX, countY, gradientY);
 
+    /// Get the orientations for the blocks
     double** orientations = nullptr;
     orientations = new double*[countY];
 
@@ -97,6 +93,7 @@ double** alterImage (char *fileName)
     return orientations;
 }
 
+/// Get the blocks out of the whole image
 Mat** getBlocks (int blockSizeX, int blockSizeY, int countX, int countY, const Mat &image)
 {
     Mat** fin = nullptr;
@@ -114,8 +111,10 @@ Mat** getBlocks (int blockSizeX, int blockSizeY, int countX, int countY, const M
     return fin;
 }
 
+/// Evaluate the field orientation for the block
 double getOrientationOfBlock (const Mat &blockX, const Mat &blockY, int sizeX, int sizeY)
 {
+    // I didn't invent this formula and hence can't explain it
     double a = 0, b = 0;
     for (int i = 0; i < sizeX; ++i)
     {
@@ -131,21 +130,25 @@ double getOrientationOfBlock (const Mat &blockX, const Mat &blockY, int sizeX, i
     return result;
 }
 
+/// Cross correlate the field orientation images
 double crossCorrelation(double **verify, double **enrolled, int sizeY, int sizeX)
 {
+    /// The count of the pixels
     int count = sizeX * sizeY;
+
+    /// The sum of the common values
     double sum = 0;
     for (int y = 0; y < sizeY; ++y)
     {
         for (int x = 0; x < sizeX; ++x)
         {
-            cout << "Orientation at " << x << "/" << y << ": " << verify[y][x] << "/" << enrolled[y][x] << "\n";
-
+            /// We don't want to take a look at the nan (black) parts of the field orientation image
             if (isnan(verify[y][x]) || isnan(enrolled[y][x]))
             {
                 count--;
                 continue;
             }
+            /// Get the common value of the orientations (varies from 0 to 1)
             sum += commonValueOfOrientation(verify[y][x], enrolled[y][x]);
         }
     }
@@ -155,13 +158,17 @@ double crossCorrelation(double **verify, double **enrolled, int sizeY, int sizeX
 
 double commonValueOfOrientation (double a, double b)
 {
+    /// The orientation in radians
     double radianA = a * 2 * 3.14159265358979323;
     double radianB = b * 2 * 3.14159265358979323;
+    /// The x part of the direction
     double ax = cos(radianA);
+    /// The y part of the direction
     double ay = sin(radianA);
     double bx = cos(radianB);
     double by = sin(radianB);
 
+    /// Multiply the vectors using the dot product
     double result = ax * bx + ay * by;
 
     return result;
@@ -170,9 +177,10 @@ double commonValueOfOrientation (double a, double b)
 /** @function main */
 int main(int argc, char **argv)
 {
-    double** verify = alterImage("C:\\Users\\Meta Colon\\Desktop\\fp\\verify.png");
-    cout << "\n";
-    double** enrolled = alterImage("C:\\Users\\Meta Colon\\Desktop\\fp\\fingerprint.png");
+    /// Get the image to verify - insert the location of the images as strings for now
+    // TODO get path as parameters
+    double** verify = getFieldOrientationImage("C:\\Users\\Meta Colon\\Desktop\\fp\\verify.png");
+    double** enrolled = getFieldOrientationImage("C:\\Users\\Meta Colon\\Desktop\\fp\\fingerprint.png");
     double result = crossCorrelation(verify, enrolled, countY, countX);
     cout << "Result: " << result << "\n";
     return 0;

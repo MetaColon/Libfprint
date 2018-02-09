@@ -17,7 +17,7 @@ using namespace cv;
 
 void ThinCanny();
 
-double **alterImage(char *fileName);
+double **getFieldOrientationImage(char *fileName);
 
 Mat **getBlocks(int blockSizeX, int blockSizeY, int countX, int countY, const Mat &image);
 
