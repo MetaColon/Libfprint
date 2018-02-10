@@ -15,15 +15,17 @@
 
 using namespace cv;
 
+struct twoDarray;
+
 void ThinCanny();
 
-double **getFieldOrientationImage(char *fileName);
+struct twoDarray getFieldOrientationImage(char *fileName);
 
 Mat **getBlocks(int blockSizeX, int blockSizeY, int countX, int countY, const Mat &image);
 
 double getOrientationOfBlock(const Mat &blockX, const Mat &blockY, int sizeX, int sizeY);
 
-double crossCorrelation(double **verify, double **enrolled, int sizeY, int sizeX);
+double crossCorrelation(double **verify, double **enrolled, int sizeX, int sizeY);
 
 double commonValueOfOrientation(double a, double b);
 

@@ -12,8 +12,6 @@ using namespace std;
 
 // TODO Common Region extraction
 // TODO => Rotation, Shifting, Scaling (=> library?)
-// TODO Cross Correlation
-// TODO => IFT?
 
 /// Global variables
 
@@ -26,7 +24,13 @@ int lowThreshold = 30;
 int ratio = 3;
 int kernel_size = 3;
 int blockSizeX = 16, blockSizeY = 8;
-int countX, countY;
+
+struct twoDarray
+{
+    double **array;
+    int sizeX;
+    int sizeY;
+};
 
 /**
  * @function ThinCanny
@@ -47,13 +51,13 @@ void ThinCanny()
 }
 
 /// Creates the field orientation image
-double** getFieldOrientationImage (char *fileName)
+twoDarray getFieldOrientationImage(char *fileName)
 {
     /// Load an image
     src = imread(fileName);
 
     if (!src.data)
-    { return nullptr; }
+    { return twoDarray{};}
 
     /// Create a matrix of the same type and size as src (for dst)
     blurred.create(src.size(), src.type());
@@ -69,35 +73,35 @@ double** getFieldOrientationImage (char *fileName)
     Sobel(blurred, gradientY, CV_64F, 1, 0);
 
     /// The size of the blocks
-    // TODO differently sized blocks
-    countX = gradientX.cols / blockSizeX;
-    countY = gradientY.rows / blockSizeY;
+    int countX = gradientX.cols / blockSizeX;
+    int countY = gradientY.rows / blockSizeY;
 
     /// Get the actual blocks
-    Mat** gradientXBlocks = getBlocks(blockSizeX, blockSizeY, countX, countY, gradientX);
-    Mat** gradientYBlocks = getBlocks(blockSizeX, blockSizeY, countX, countY, gradientY);
+    Mat **gradientXBlocks = getBlocks(blockSizeX, blockSizeY, countX, countY, gradientX);
+    Mat **gradientYBlocks = getBlocks(blockSizeX, blockSizeY, countX, countY, gradientY);
 
     /// Get the orientations for the blocks
-    double** orientations = nullptr;
-    orientations = new double*[countY];
+    double **orientations = nullptr;
+    orientations = new double *[countY];
 
     for (int y = 0; y < countY; ++y)
     {
         orientations[y] = new double[countX];
         for (int x = 0; x < countX; ++x)
         {
-            orientations[y][x] = getOrientationOfBlock(gradientXBlocks[y][x], gradientYBlocks[y][x], countX, countY);
+            orientations[y][x] = getOrientationOfBlock(gradientXBlocks[y][x], gradientYBlocks[y][x],
+                                                       countX, countY);
         }
     }
 
-    return orientations;
+    return twoDarray{orientations, countX, countY};
 }
 
 /// Get the blocks out of the whole image
-Mat** getBlocks (int blockSizeX, int blockSizeY, int countX, int countY, const Mat &image)
+Mat **getBlocks(int blockSizeX, int blockSizeY, int countX, int countY, const Mat &image)
 {
-    Mat** fin = nullptr;
-    fin = new Mat*[countY];
+    Mat **fin = nullptr;
+    fin = new Mat *[countY];
 
     for (int y = 0; y < countY; ++y)
     {
@@ -112,7 +116,7 @@ Mat** getBlocks (int blockSizeX, int blockSizeY, int countX, int countY, const M
 }
 
 /// Evaluate the field orientation for the block
-double getOrientationOfBlock (const Mat &blockX, const Mat &blockY, int sizeX, int sizeY)
+double getOrientationOfBlock(const Mat &blockX, const Mat &blockY, int sizeX, int sizeY)
 {
     // I didn't invent this formula and hence can't explain it
     double a = 0, b = 0;
@@ -131,7 +135,7 @@ double getOrientationOfBlock (const Mat &blockX, const Mat &blockY, int sizeX, i
 }
 
 /// Cross correlate the field orientation images
-double crossCorrelation(double **verify, double **enrolled, int sizeY, int sizeX)
+double crossCorrelation(double **verify, double **enrolled, int sizeX, int sizeY)
 {
     /// The count of the pixels
     int count = sizeX * sizeY;
@@ -156,7 +160,7 @@ double crossCorrelation(double **verify, double **enrolled, int sizeY, int sizeX
     return sum / count;
 }
 
-double commonValueOfOrientation (double a, double b)
+double commonValueOfOrientation(double a, double b)
 {
     /// The orientation in radians
     double radianA = a * 2 * 3.14159265358979323;
@@ -179,9 +183,16 @@ int main(int argc, char **argv)
 {
     /// Get the image to verify - insert the location of the images as strings for now
     // TODO get path as parameters
-    double** verify = getFieldOrientationImage("C:\\Users\\Meta Colon\\Desktop\\fp\\verify.png");
-    double** enrolled = getFieldOrientationImage("C:\\Users\\Meta Colon\\Desktop\\fp\\fingerprint.png");
-    double result = crossCorrelation(verify, enrolled, countY, countX);
+    twoDarray verify = getFieldOrientationImage("C:\\Users\\Meta Colon\\Desktop\\fp\\verify2.png");
+    twoDarray enrolled = getFieldOrientationImage(
+            "C:\\Users\\Meta Colon\\Desktop\\fp\\fingerprint.png");
+
+    int sizeX = min(verify.sizeX, enrolled.sizeX);
+    int sizeY = min(verify.sizeY, enrolled.sizeY);
+
+    cout << "SizeX: " << sizeX << "; SizeY: " << sizeY << "\n";
+
+    double result = crossCorrelation(verify.array, enrolled.array, sizeX, sizeY);
     cout << "Result: " << result << "\n";
     return 0;
 }
