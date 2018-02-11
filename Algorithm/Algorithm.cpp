@@ -4,8 +4,9 @@
 #include <stdio.h>
 #include <string>
 #include <iostream>
+#include <utility>
 
-#include "Algorithm.hpp"
+#include "Algorithm.h"
 
 using namespace cv;
 using namespace std;
@@ -53,8 +54,14 @@ void ThinCanny()
 /// Creates the field orientation image
 twoDarray getFieldOrientationImage(char *fileName)
 {
+    return getFieldOrientationImage (imread(fileName));
+}
+
+/// Creates the field orientation image
+twoDarray getFieldOrientationImage(Mat img)
+{
     /// Load an image
-    src = imread(fileName);
+    src = std::move(img);
 
     if (!src.data)
     { return twoDarray{};}
@@ -178,14 +185,12 @@ double commonValueOfOrientation(double a, double b)
     return result;
 }
 
-/** @function main */
-int main(int argc, char **argv)
+double getMatchPercentage (char* path1, char* path2)
 {
     /// Get the image to verify - insert the location of the images as strings for now
     // TODO get path as parameters
-    twoDarray verify = getFieldOrientationImage("C:\\Users\\Meta Colon\\Desktop\\fp\\verify2.png");
-    twoDarray enrolled = getFieldOrientationImage(
-            "C:\\Users\\Meta Colon\\Desktop\\fp\\fingerprint.png");
+    twoDarray verify = getFieldOrientationImage(path1);
+    twoDarray enrolled = getFieldOrientationImage(path2);
 
     int sizeX = min(verify.sizeX, enrolled.sizeX);
     int sizeY = min(verify.sizeY, enrolled.sizeY);
@@ -194,5 +199,32 @@ int main(int argc, char **argv)
 
     double result = crossCorrelation(verify.array, enrolled.array, sizeX, sizeY);
     cout << "Result: " << result << "\n";
+
+    return result;
+}
+
+double getMatchPercentage (Mat img1, Mat img2)
+{
+    /// Get the image to verify - insert the location of the images as strings for now
+    // TODO get path as parameters
+    twoDarray verify = getFieldOrientationImage(std::move(img1));
+    twoDarray enrolled = getFieldOrientationImage(std::move(img2));
+
+    int sizeX = min(verify.sizeX, enrolled.sizeX);
+    int sizeY = min(verify.sizeY, enrolled.sizeY);
+
+    cout << "SizeX: " << sizeX << "; SizeY: " << sizeY << "\n";
+
+    double result = crossCorrelation(verify.array, enrolled.array, sizeX, sizeY);
+    cout << "Result: " << result << "\n";
+
+    return result;
+}
+
+/** @function main */
+int main(int argc, char **argv)
+{
+    getMatchPercentage("C:\\Users\\Meta Colon\\Desktop\\fp\\verify2.png",
+                       "C:\\Users\\Meta Colon\\Desktop\\fp\\fingerprint.png");
     return 0;
 }

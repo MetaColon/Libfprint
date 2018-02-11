@@ -125,7 +125,13 @@
 		<Unit filename="/cygdrive/d/Documents/KeckDriver/Algorithm/Algorithm.cpp">
 			<Option target="Algorithm"/>
 		</Unit>
-		<Unit filename="/cygdrive/d/Documents/KeckDriver/Algorithm/Algorithm.hpp">
+		<Unit filename="/cygdrive/d/Documents/KeckDriver/Algorithm/Algorithm.h">
+			<Option target="Algorithm"/>
+		</Unit>
+		<Unit filename="/cygdrive/d/Documents/KeckDriver/Algorithm/Testing.cpp">
+			<Option target="Algorithm"/>
+		</Unit>
+		<Unit filename="/cygdrive/d/Documents/KeckDriver/Algorithm/Testing.h">
 			<Option target="Algorithm"/>
 		</Unit>
 		<Unit filename="/cygdrive/d/Documents/KeckDriver/Algorithm/CMakeLists.txt">
