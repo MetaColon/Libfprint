@@ -226,6 +226,9 @@ ProcessorCount_cmd_getconf:FILEPATH=/usr/bin/getconf.exe
 //Path to a program.
 ProcessorCount_cmd_sysctl:FILEPATH=ProcessorCount_cmd_sysctl-NOTFOUND
 
+//The directory containing a CMake configuration file for libfprint.
+libfprint_DIR:PATH=libfprint_DIR-NOTFOUND
+
 
 ########################
 # INTERNAL cache entries

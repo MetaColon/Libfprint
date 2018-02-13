@@ -43,12 +43,16 @@ cstdio
 -
 cstdlib
 -
+libfprint
+-
 opencv2/imgproc/imgproc.hpp
 -
 opencv2/highgui/highgui.hpp
 -
 Algorithm.h
 /cygdrive/d/Documents/KeckDriver/Algorithm/Algorithm.h
+driver/elan.h
+/cygdrive/d/Documents/KeckDriver/Algorithm/driver/elan.h
 Testing.h
 /cygdrive/d/Documents/KeckDriver/Algorithm/Testing.h
 
@@ -57,10 +61,28 @@ cstdio
 -
 cstdlib
 -
+libusb-1.0
+-
+fp_internal.h
+-
+assembling.h
+-
+libfprint
+-
 opencv2/imgproc/imgproc.hpp
 -
 opencv2/highgui/highgui.hpp
 -
 Algorithm.h
 /cygdrive/d/Documents/KeckDriver/Algorithm/Algorithm.h
+driver/elan.h
+/cygdrive/d/Documents/KeckDriver/Algorithm/driver/elan.h
+Testing.h
+/cygdrive/d/Documents/KeckDriver/Algorithm/Testing.h
+
+/cygdrive/d/Documents/KeckDriver/Algorithm/driver/elan.h
+string.h
+-
+libusb.h
+-
 

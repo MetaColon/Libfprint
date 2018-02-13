@@ -1,4 +1,20 @@
 "C:\Users\Meta Colon\.CLion2017.3\system\cygwin_cmake\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /cygdrive/d/Documents/KeckDriver/Algorithm
--- Configuring done
--- Generating done
--- Build files have been written to: /cygdrive/d/Documents/KeckDriver/Algorithm/cmake-build-debug
+CMake Error at CMakeLists.txt:6 (find_package):
+  By not providing "Findlibfprint.cmake" in CMAKE_MODULE_PATH this project
+  has asked CMake to find a package configuration file provided by
+  "libfprint", but CMake did not find one.
+
+  Could not find a package configuration file provided by "libfprint" with
+  any of the following names:
+
+    libfprintConfig.cmake
+    libfprint-config.cmake
+
+  Add the installation prefix of "libfprint" to CMAKE_PREFIX_PATH or set
+  "libfprint_DIR" to a directory containing one of the above files.  If
+  "libfprint" provides a separate development package or SDK, be sure it has
+  been installed.
+
+
+-- Configuring incomplete, errors occurred!
+See also "/cygdrive/d/Documents/KeckDriver/Algorithm/cmake-build-debug/CMakeFiles/CMakeOutput.log".

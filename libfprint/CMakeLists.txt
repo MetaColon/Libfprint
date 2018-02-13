@@ -110,7 +110,6 @@ add_executable(libfprint
         libfprint/pixman.c
         libfprint/poll.c
         libfprint/sync.c
-        .gitignore
         AUTHORS
         autogen.sh
         configure.ac
