@@ -73,7 +73,7 @@ public class Main
                     } while (captureWaitResponse.get(0) != 0x55);
                     ByteBuffer captureImage = executeCommand("Capture Read", new byte[]{0x00, 0x09}, -1, true);
                     saveImage(captureImage);
-                    
+
                     System.out.println("Continue? (y/n)");
                     cont = (char) System.in.read();
                     currentImageIndex++;
@@ -184,7 +184,7 @@ public class Main
 
     private static ByteBuffer readImage()
     {
-        ByteBuffer buffer = BufferUtils.allocateByteBuffer(HEIGHT * WIDTH).order(ByteOrder.LITTLE_ENDIAN);
+        ByteBuffer buffer = BufferUtils.allocateByteBuffer(rawFrameWidth * frameWidth * 2).order(ByteOrder.LITTLE_ENDIAN);
         IntBuffer transferred = BufferUtils.allocateIntBuffer();
         if (LibUsb.bulkTransfer(handle, IMG_ENDPOINT, buffer, transferred, TIMEOUT) != LibUsb.SUCCESS)
             return null;
