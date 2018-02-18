@@ -24,14 +24,14 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.76004726">
+    <splitter split-orientation="horizontal" split-proportion="0.5055162">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="elan.h" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/libfprint/drivers/elan.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-684">
-                  <caret line="69" column="9" lean-forward="true" selection-start-line="69" selection-start-column="9" selection-end-line="69" selection-end-column="9" />
+                <state relative-caret-position="1100">
+                  <caret line="57" column="31" lean-forward="true" selection-start-line="57" selection-start-column="31" selection-end-line="57" selection-end-column="31" />
                   <folding />
                 </state>
               </provider>
@@ -40,8 +40,8 @@
           <file leaf-file-name="fp_internal.h" pinned="false" current-in-tab="false">
             <entry file="file://C:/cygwin64/usr/include/fp_internal.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="725">
-                  <caret line="449" column="43" lean-forward="true" selection-start-line="449" selection-start-column="43" selection-end-line="449" selection-end-column="43" />
+                <state relative-caret-position="9878">
+                  <caret line="449" column="43" lean-forward="false" selection-start-line="449" selection-start-column="43" selection-end-line="449" selection-end-column="43" />
                   <folding />
                 </state>
               </provider>
@@ -51,11 +51,11 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="elan.c" pinned="false" current-in-tab="true">
+          <file leaf-file-name="elan.c" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/libfprint/drivers/elan.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="409">
-                  <caret line="318" column="12" lean-forward="false" selection-start-line="318" selection-start-column="12" selection-end-line="318" selection-end-column="12" />
+                <state relative-caret-position="267">
+                  <caret line="93" column="30" lean-forward="false" selection-start-line="93" selection-start-column="30" selection-end-line="93" selection-end-column="30" />
                   <folding />
                 </state>
               </provider>
@@ -64,8 +64,28 @@
           <file leaf-file-name="imgdev.c" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/libfprint/imgdev.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="418">
-                  <caret line="332" column="5" lean-forward="false" selection-start-line="332" selection-start-column="5" selection-end-line="332" selection-end-column="5" />
+                <state relative-caret-position="551">
+                  <caret line="250" column="5" lean-forward="true" selection-start-line="250" selection-start-column="5" selection-end-line="250" selection-end-column="5" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="data.c" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/libfprint/data.c">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="421">
+                  <caret line="96" column="29" lean-forward="false" selection-start-line="96" selection-start-column="29" selection-end-line="96" selection-end-column="29" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="img.c" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/libfprint/img.c">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="421">
+                  <caret line="149" column="21" lean-forward="false" selection-start-line="149" selection-start-column="21" selection-end-line="149" selection-end-column="21" />
                   <folding />
                 </state>
               </provider>
@@ -74,7 +94,7 @@
           <file leaf-file-name="libusb.h" pinned="false" current-in-tab="false">
             <entry file="file://C:/cygwin64/usr/include/libusb-1.0/libusb.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="421">
+                <state relative-caret-position="1221">
                   <caret line="1559" column="19" lean-forward="false" selection-start-line="1559" selection-start-column="19" selection-end-line="1559" selection-end-column="19" />
                   <folding />
                 </state>
@@ -99,6 +119,11 @@
       <find>0x31</find>
       <find>0x3f</find>
       <find>09</find>
+      <find>IMG_ACTION</find>
+      <find>img_dev_cap</find>
+      <find>fp_img_savc</find>
+      <find>fp_img_save</find>
+      <find>P5</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -131,10 +156,11 @@
         <option value="C:/cygwin64/usr/include/glib-2.0/glib/galloca.h" />
         <option value="C:/cygwin64/usr/include/glib-2.0/glib.h" />
         <option value="C:/cygwin64/usr/include/fp_internal.h" />
-        <option value="$PROJECT_DIR$/libfprint/drivers/elan.c" />
         <option value="$PROJECT_DIR$/libfprint/core.c" />
         <option value="$PROJECT_DIR$/libfprint/drivers/elan.h" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/libfprint/drivers/elan.c" />
+        <option value="$PROJECT_DIR$/libfprint/img.c" />
       </list>
     </option>
   </component>
@@ -263,7 +289,9 @@
       <workItem from="1515941246478" duration="205000" />
       <workItem from="1517335813522" duration="426000" />
       <workItem from="1518525473117" duration="4309000" />
-      <workItem from="1518793229817" duration="3968000" />
+      <workItem from="1518793229817" duration="5297000" />
+      <workItem from="1518943770320" duration="1629000" />
+      <workItem from="1518953811957" duration="1411000" />
     </task>
     <task id="LOCAL-00001" summary="Cleanup &amp; ignoring missing packages">
       <created>1515445659053</created>
@@ -297,7 +325,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23381000" />
+    <option name="totallyTimeSpent" value="27750000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="3833" y="406" width="2576" height="1426" extended-state="0" />
@@ -406,42 +434,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/libfprint/drivers/elan.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="10" lean-forward="true" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/img_capture.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="29" lean-forward="false" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/cygwin64/usr/include/bash/config.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="28" lean-forward="true" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/cygwin64/usr/include/cygwin/config.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/enroll.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="73" lean-forward="false" selection-start-line="26" selection-start-column="73" selection-end-line="26" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/libfprint/core.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -663,7 +655,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="589">
           <caret line="31" column="22" lean-forward="false" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -671,7 +662,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="741">
           <caret line="39" column="34" lean-forward="false" selection-start-line="39" selection-start-column="34" selection-end-line="39" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -694,7 +684,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -741,22 +730,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/cygwin64/usr/include/libusb-1.0/libusb.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="1559" column="19" lean-forward="false" selection-start-line="1559" selection-start-column="19" selection-end-line="1559" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://C:/cygwin64/usr/include/fp_internal.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="725">
-          <caret line="449" column="43" lean-forward="true" selection-start-line="449" selection-start-column="43" selection-end-line="449" selection-end-column="43" />
+        <state relative-caret-position="9878">
+          <caret line="449" column="43" lean-forward="false" selection-start-line="449" selection-start-column="43" selection-end-line="449" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -765,30 +745,76 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-544">
           <caret line="83" column="1" lean-forward="true" selection-start-line="83" selection-start-column="1" selection-end-line="83" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libfprint/async.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="28" column="5" lean-forward="false" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libfprint/assembling.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="883">
+          <caret line="261" column="0" lean-forward="true" selection-start-line="261" selection-start-column="0" selection-end-line="261" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/cygwin64/usr/include/stdio.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="196" column="60" lean-forward="false" selection-start-line="196" selection-start-column="60" selection-end-line="196" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libfprint/drivers/elan.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1100">
+          <caret line="57" column="31" lean-forward="true" selection-start-line="57" selection-start-column="31" selection-end-line="57" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/cygwin64/usr/include/libusb-1.0/libusb.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1221">
+          <caret line="1559" column="19" lean-forward="false" selection-start-line="1559" selection-start-column="19" selection-end-line="1559" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libfprint/data.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="96" column="29" lean-forward="false" selection-start-line="96" selection-start-column="29" selection-end-line="96" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/libfprint/imgdev.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="332" column="5" lean-forward="false" selection-start-line="332" selection-start-column="5" selection-end-line="332" selection-end-column="5" />
+        <state relative-caret-position="551">
+          <caret line="250" column="5" lean-forward="true" selection-start-line="250" selection-start-column="5" selection-end-line="250" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/libfprint/drivers/elan.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="318" column="12" lean-forward="false" selection-start-line="318" selection-start-column="12" selection-end-line="318" selection-end-column="12" />
+        <state relative-caret-position="267">
+          <caret line="93" column="30" lean-forward="false" selection-start-line="93" selection-start-column="30" selection-end-line="93" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/libfprint/drivers/elan.h">
+    <entry file="file://$PROJECT_DIR$/libfprint/img.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-684">
-          <caret line="69" column="9" lean-forward="true" selection-start-line="69" selection-start-column="9" selection-end-line="69" selection-end-column="9" />
+        <state relative-caret-position="421">
+          <caret line="149" column="21" lean-forward="false" selection-start-line="149" selection-start-column="21" selection-end-line="149" selection-end-column="21" />
           <folding />
         </state>
       </provider>

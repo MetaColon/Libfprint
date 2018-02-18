@@ -97,7 +97,7 @@ static void elan_save_frame(struct fp_img_dev *dev)
 
     /* Raw images are vertical and perpendicular to swipe direction of a
      * normalized image, which means we need to make them horizontal before
-     * assembling. We also discard stirpes of ELAN_FRAME_MARGIN along raw
+     * assembling. We also discard stripes of ELAN_FRAME_MARGIN along raw
      * height. */
     for (int y = 0; y < raw_height; y++)
         for (int x = ELAN_FRAME_MARGIN;
@@ -114,7 +114,7 @@ static void elan_save_frame(struct fp_img_dev *dev)
     elandev->num_frames += 1;
 }
 
-/* Transform raw sesnsor data to normalized 8-bit grayscale image. */
+/* Transform raw sensor data to normalized 8-bit greyscale image. */
 static void elan_process_frame(unsigned short *raw_frame, GSList **frames)
 {
     unsigned int frame_size =

@@ -2,6 +2,9 @@ package de.teemze;
 
 import org.usb4java.*;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
@@ -14,15 +17,22 @@ public class Main
     private static final byte OUT_ENDPOINT = 0x01;
     private static final byte IN_ENDPOINT = (byte) 0x83;
     private static final byte IMG_ENDPOINT = (byte) 0x82;
-    private static final int WIDTH = 144;
-    private static final int HEIGHT = 64;
+    private static final String RESULT_FILE_PATH = "image";
+    private static final String TYPE = "pgm";
+    private static final byte PADDING = 2; //TODO Evaluate good padding
 
+    private static byte frameWidth;
+    private static byte rawFrameWidth;
+    private static byte frameHeight;
+
+    private static int currentImageIndex = 0;
     private static Context context;
     private static Device device;
     private static DeviceHandle handle;
 
     public static void main(String[] args)
     {
+        //saveImage(createTestImage());
         if (!initialize() || !findDevice() || !getHandle())
         {
             System.out.println("Something went wrong.");
@@ -38,7 +48,8 @@ public class Main
             try
             {
                 // Activate
-                ByteBuffer dims = executeCommand("Activate GetSensorDim", new byte[]{0x00, 0x0c}, 4, false); //TODO use this dimensions
+                ByteBuffer dims = executeCommand("Activate GetSensorDim", new byte[]{0x00, 0x0c}, 4, false);
+                processDimensions(dims);
                 ByteBuffer startInitResponse0 = executeCommand("Activate InitStart0", new byte[]{0x40, 0x19}, 2, false);
                 ByteBuffer startInitResponse1 = executeCommand("Activate InitStart1", new byte[]{0x40, 0x2a}, 2, false); //TODO use the results
                 ByteBuffer activateImage = executeCommand("Activate Read", new byte[]{0x00, 0x09}, -1, true);
@@ -51,16 +62,28 @@ public class Main
                 ByteBuffer calibrateEndResponse = executeCommand("Calibrate End", new byte[]{0x40, 0x24}, 2, false);
 
                 // Capture
-                ByteBuffer captureStartResponse = executeCommand("Capture Start", new byte[]{0x40, 0x31}, 0, false); //TODO return value irrelevant
-                ByteBuffer captureWaitResponse;
+                ByteBuffer captureStartResponse = executeCommand("Capture Start", new byte[]{0x40, 0x31}, 0, false);
+                char cont;
                 do
                 {
-                    captureWaitResponse = executeCommand("Capture WaitFinger", new byte[]{0x40, 0x3f}, 1, false);
-                } while (captureWaitResponse.get(0) != 0x55);
-                ByteBuffer captureImage = executeCommand("Capture Read", new byte[]{0x00, 0x09}, -1, true); //TODO save image, get multiple images
+                    ByteBuffer captureWaitResponse;
+                    do
+                    {
+                        captureWaitResponse = executeCommand("Capture WaitFinger", new byte[]{0x40, 0x3f}, 1, false);
+                    } while (captureWaitResponse.get(0) != 0x55);
+                    ByteBuffer captureImage = executeCommand("Capture Read", new byte[]{0x00, 0x09}, -1, true);
+                    saveImage(captureImage);
+                    
+                    System.out.println("Continue? (y/n)");
+                    cont = (char) System.in.read();
+                    currentImageIndex++;
+                }while (Character.toLowerCase(cont) == 'y');
 
                 // Deactivate
                 ByteBuffer deactivateResponse = executeCommand("Deactivate", new byte[]{0x00, 0x0b}, 0, false);
+            } catch (IOException e)
+            {
+                e.printStackTrace();
             } finally
             {
                 if (LibUsb.releaseInterface(handle, 0) != LibUsb.SUCCESS)
@@ -72,7 +95,62 @@ public class Main
         }
     }
 
-    private static ByteBuffer executeCommand (String name, byte[] data, int resultLength, boolean image)
+    private static void processDimensions (ByteBuffer rawData)
+    {
+        // See elan.c line 540ff
+        frameWidth = rawData.get(2);
+        rawFrameWidth = rawData.get(0);
+        frameHeight = (byte)(rawFrameWidth - 2 * PADDING);
+    }
+
+    /*private static ByteBuffer createTestImage()
+    {
+        ByteBuffer buffer = BufferUtils.allocateByteBuffer(WIDTH * HEIGHT);
+        Random random = new Random();
+        byte[] randomArray = new byte[WIDTH * HEIGHT];
+        random.nextBytes(randomArray);
+        for (int i = 0; i < WIDTH * HEIGHT; i++)
+            buffer.put(i, randomArray[i]);
+        return buffer;
+    }*/
+
+    private static boolean saveImage(ByteBuffer rawImage)
+    {
+        // See elan.c line 90ff
+        byte rawHeight = frameWidth;
+        byte rawWidth = rawFrameWidth;
+        byte[] frame = new byte[frameWidth * frameHeight * 2];
+
+        for (int y = 0; y < rawHeight; y++)
+            for (int x = PADDING; x < rawWidth -  PADDING; x++)
+            {
+                int frameIndex = y + (x - PADDING) * rawHeight;
+                int rawIndex = x + y * rawWidth;
+                frame[frameIndex] = rawImage.get(rawIndex);
+            }
+
+        File file = new File(String.format("%s_%d.%s", RESULT_FILE_PATH, currentImageIndex, TYPE));
+        //file.deleteOnExit();
+        try
+        {
+            // See img.c line 139ff
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            char[] charArray = String.format("P5 %d %d 255\n", frameWidth, frameHeight).toCharArray();
+            byte[] byteArray = new byte[charArray.length];
+            for (int i = 0; i < charArray.length; i++)
+                byteArray[i] = (byte) charArray[i];
+            fileOutputStream.write(byteArray);
+            fileOutputStream.write(frame);
+            fileOutputStream.close();
+            return true;
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private static ByteBuffer executeCommand(String name, byte[] data, int resultLength, boolean image)
     {
         System.out.println(name);
         write(data);
@@ -104,7 +182,7 @@ public class Main
         return buffer;
     }
 
-    private static ByteBuffer readImage ()
+    private static ByteBuffer readImage()
     {
         ByteBuffer buffer = BufferUtils.allocateByteBuffer(HEIGHT * WIDTH).order(ByteOrder.LITTLE_ENDIAN);
         IntBuffer transferred = BufferUtils.allocateIntBuffer();
