@@ -69,7 +69,7 @@ public class Main
                     ByteBuffer captureWaitResponse;
                     do
                     {
-                        captureWaitResponse = executeCommand("Capture WaitFinger", new byte[]{0x40, 0x3f}, 1, false);
+                        captureWaitResponse = executeCommand("Capture WaitFinger", new byte[]{0x40, 0x3f}, 1, false); //TODO
                     } while (captureWaitResponse.get(0) != 0x55);
                     ByteBuffer captureImage = executeCommand("Capture Read", new byte[]{0x00, 0x09}, -1, true);
                     saveImage(captureImage);
@@ -101,6 +101,7 @@ public class Main
         frameWidth = rawData.get(2);
         rawFrameWidth = rawData.get(0);
         frameHeight = (byte)(rawFrameWidth - 2 * PADDING);
+        System.out.println(String.format("frameWidth: 0x%x; rawFrameWidth: 0x%x; frameHeight: 0x%x", frameWidth, rawFrameWidth, frameHeight));
     }
 
     /*private static ByteBuffer createTestImage()
@@ -184,7 +185,7 @@ public class Main
 
     private static ByteBuffer readImage()
     {
-        ByteBuffer buffer = BufferUtils.allocateByteBuffer(rawFrameWidth * frameWidth * 2).order(ByteOrder.LITTLE_ENDIAN);
+        ByteBuffer buffer = BufferUtils.allocateByteBuffer(rawFrameWidth * frameWidth & 0xFF * 2).order(ByteOrder.LITTLE_ENDIAN);
         IntBuffer transferred = BufferUtils.allocateIntBuffer();
         if (LibUsb.bulkTransfer(handle, IMG_ENDPOINT, buffer, transferred, TIMEOUT) != LibUsb.SUCCESS)
             return null;
