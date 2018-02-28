@@ -155,8 +155,8 @@ public class Main
     {
         System.out.println(name);
         write(data);
-        if (resultLength <= 0 && !image)
-            return null;
+        //if (resultLength <= 0 && !image)
+        //    return null;
         ByteBuffer result = image ? readImage() : read(resultLength);
         System.out.print("    ");
         System.out.println(result);
