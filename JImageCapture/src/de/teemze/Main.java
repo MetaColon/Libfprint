@@ -1,7 +1,9 @@
 package de.teemze;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.usb4java.*;
 
+import javax.xml.bind.DatatypeConverter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -76,6 +78,7 @@ public class Main
 
                     System.out.println("Continue? (y/n)");
                     cont = (char) System.in.read();
+                    System.in.read();
                     currentImageIndex++;
                 }while (Character.toLowerCase(cont) == 'y');
 
@@ -101,7 +104,7 @@ public class Main
         frameWidth = rawData.get(2);
         rawFrameWidth = rawData.get(0);
         frameHeight = (byte)(rawFrameWidth - 2 * PADDING);
-        System.out.println(String.format("frameWidth: 0x%x; rawFrameWidth: 0x%x; frameHeight: 0x%x", frameWidth, rawFrameWidth, frameHeight));
+        System.out.println(String.format("frameWidth: %d; rawFrameWidth: %d; frameHeight: %d", frameWidth, rawFrameWidth, frameHeight));
     }
 
     /*private static ByteBuffer createTestImage()
@@ -118,17 +121,28 @@ public class Main
     private static boolean saveImage(ByteBuffer rawImage)
     {
         // See elan.c line 90ff
-        byte rawHeight = frameWidth;
-        byte rawWidth = rawFrameWidth;
-        byte[] frame = new byte[frameWidth * frameHeight * 2];
+        /*byte rawHeight = frameWidth;
+        byte rawWidth = rawFrameWidth;*/
+        byte[] frame = new byte[64 * 144 / 2];
 
-        for (int y = 0; y < rawHeight; y++)
-            for (int x = PADDING; x < rawWidth -  PADDING; x++)
+        /*for (int y = 0; y < 64; y++) {
+            for (int x = 0; x < 144; x++)
             {
-                int frameIndex = y + (x - PADDING) * rawHeight;
-                int rawIndex = x + y * rawWidth;
-                frame[frameIndex] = rawImage.get(rawIndex);
+                int frameIndex = y + x * 64;
+                int rawIndex = x + y * 144;
+                int index = y * 144 + x;
+                frame[index] = rawImage.get(index);
+                System.out.print(rawImage.get(index) > 0 ? "#" : " ");
             }
+            System.out.println();
+        }*/
+
+        for (int i = 0; i < 144 * 64 / 2; i++) {
+            frame[i] = rawImage.get(i * 2);
+            System.out.print(frame[i] > 0 ? "#" : " ");
+            if (i % 64 == 0)
+                System.out.println();
+        }
 
         File file = new File(String.format("%s_%d.%s", RESULT_FILE_PATH, currentImageIndex, TYPE));
         //file.deleteOnExit();
@@ -136,7 +150,7 @@ public class Main
         {
             // See img.c line 139ff
             FileOutputStream fileOutputStream = new FileOutputStream(file);
-            char[] charArray = String.format("P5 %d %d 255\n", frameWidth, frameHeight).toCharArray();
+            char[] charArray = String.format("P5 %d %d 255\n", 144 / 2, 64).toCharArray();
             byte[] byteArray = new byte[charArray.length];
             for (int i = 0; i < charArray.length; i++)
                 byteArray[i] = (byte) charArray[i];
@@ -155,11 +169,19 @@ public class Main
     {
         System.out.println(name);
         write(data);
+        System.out.print("    ");
+        for (byte aData : data) {
+            System.out.print(DatatypeConverter.printHexBinary(new byte[]{aData}) + ";");
+        }
+        System.out.println();
         //if (resultLength <= 0 && !image)
         //    return null;
         ByteBuffer result = image ? readImage() : read(resultLength);
         System.out.print("    ");
-        System.out.println(result);
+        for (int i = 0; i < resultLength; i++) {
+            System.out.print(DatatypeConverter.printHexBinary(new byte[]{ result.get(i) } )+ ";");
+        }
+        System.out.println();
         return result;
     }
 
@@ -169,7 +191,7 @@ public class Main
         buffer.put(data);
         IntBuffer transferred = BufferUtils.allocateIntBuffer();
         int result = LibUsb.bulkTransfer(handle, OUT_ENDPOINT, buffer, transferred, TIMEOUT);
-        System.out.println("Sent " + transferred.get() + " bytes");
+        System.out.println("Sent " + transferred.get() + " bytes; Result: " + result);
         return result == LibUsb.SUCCESS;
     }
 
@@ -177,19 +199,21 @@ public class Main
     {
         ByteBuffer buffer = BufferUtils.allocateByteBuffer(size).order(ByteOrder.LITTLE_ENDIAN);
         IntBuffer transferred = BufferUtils.allocateIntBuffer();
-        if (LibUsb.bulkTransfer(handle, IN_ENDPOINT, buffer, transferred, TIMEOUT) != LibUsb.SUCCESS)
+        int result = LibUsb.bulkTransfer(handle, IN_ENDPOINT, buffer, transferred, TIMEOUT);
+        System.out.println("Read " + transferred.get() + " bytes; Result: " + result);
+        if (result != LibUsb.SUCCESS)
             return null;
-        System.out.println("Read " + transferred.get() + " bytes");
         return buffer;
     }
 
     private static ByteBuffer readImage()
     {
-        ByteBuffer buffer = BufferUtils.allocateByteBuffer(rawFrameWidth * frameWidth & 0xFF * 2).order(ByteOrder.LITTLE_ENDIAN);
+        ByteBuffer buffer = BufferUtils.allocateByteBuffer(/*rawFrameWidth * frameWidth & 0xFF * 2*/144 * 64).order(ByteOrder.LITTLE_ENDIAN);
         IntBuffer transferred = BufferUtils.allocateIntBuffer();
-        if (LibUsb.bulkTransfer(handle, IMG_ENDPOINT, buffer, transferred, TIMEOUT) != LibUsb.SUCCESS)
+        int result = LibUsb.bulkTransfer(handle, IMG_ENDPOINT, buffer, transferred, TIMEOUT);
+        System.out.println("Read " + transferred.get() + " bytes; Result: " + result);
+        if (result != LibUsb.SUCCESS)
             return null;
-        System.out.println("Read " + transferred.get() + " bytes");
         return buffer;
     }
 
